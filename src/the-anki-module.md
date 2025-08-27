@@ -8,12 +8,13 @@ in Anki's source repo.
 ## The Collection
 
 All operations on a collection file are accessed via a `Collection`
-object. The currently-open Collection is accessible via a global `mw.col`,
-where `mw` stands for `main window`. 
+object. 
 
-**Initiate collection from mw:**
+If running code inside an add-on, the Anki collection will be 
+accessible via the Anki main window, called `mw`, as shown below.
+
+**Access collection from mw:**
 ```python
-from anki.collection import ImportCsvRequest
 from aqt import mw
 
 
@@ -21,7 +22,7 @@ col = mw.col
 ```
 When using the `anki` module outside of Anki, the `mw` object will not exist.
 You will need to create your own `Collection` object 
-from `collection.anki2` ([see docs ]( https://docs.ankiweb.net/files.html) 
+from `collection.anki2` ([see docs]( https://docs.ankiweb.net/files.html) 
 or [use our helper function](#get-collection-path-helper-function)).
 
 **Initiate collection from file:**
@@ -30,14 +31,13 @@ from anki.collection import Collection
 
 
 profile_name = 'insert_your_profile_name'     # hint: default is 'User 1'
-# col_path = 'insert_manually'    # manual insertion
 col_path = get_collection_path(profile_name)  # using helper function 
 col = Collection(col_path)
 ```
 
 Some basic examples of what you can do with a collection follow. 
-With `mw` usage, please note that you should put
-these in something like [testFunction()](./a-basic-addon.md); you can’t run them
+With `mw` usage, please note that you should put its calls 
+in something like [testFunction()](./a-basic-addon.md); you can’t run them
 directly in an add-on, as add-ons are initialized during Anki startup, before
 any collection or profile has been loaded.
 
